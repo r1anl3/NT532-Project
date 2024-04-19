@@ -7,8 +7,9 @@ read -p "Enter source (image/video path): " source
 
 # Run the Python code with the entered arguments
 command = python3 trt-yolo-${num}.py --${type} "${source}" -m yolov4-416
-echo "Running command: ${command}"
-python3 command
+echo "Running command: $command"
 
+# Run the command
+$command
 
 echo "Done!"
