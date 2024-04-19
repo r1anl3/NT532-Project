@@ -19,7 +19,12 @@ from utils.visualization import BBoxVisualization
 from utils.yolo_with_plugins import TrtYOLO
 
 
+import paho.mqtt.client as paho
+
+from paho import mqtt
+
 WINDOW_NAME = 'TrtYOLODemo'
+client = paho.Client(paho.CallbackAPIVersion.VERSION1,client_id="", userdata=None, protocol=paho.MQTTv5)
 
 
 def parse_args():
@@ -60,7 +65,10 @@ def loop_and_detect(cam, trt_yolo, conf_th, vis):
     full_scrn = False
     fps = 0.0
     tic = time.time()
+    count = 0
+
     while True:
+        count += 1
         if cv2.getWindowProperty(WINDOW_NAME, 0) < 0:
             break
         img = cam.read()
@@ -72,6 +80,10 @@ def loop_and_detect(cam, trt_yolo, conf_th, vis):
         img = show_fps(img, fps)
         img = show_total(img, vis.box_count)
         cv2.imshow(WINDOW_NAME, img)
+
+        if(count == 20):
+            client.publish("iot-uit/room-status", payload="Room 2: " + str(vis.box_count) + "/20 people", qos=1)
+
         toc = time.time()
         curr_fps = 1.0 / (toc - tic)
         # calculate an exponentially decaying average of fps number
@@ -100,6 +112,9 @@ def main():
     cls_dict = get_cls_dict(args.category_num)
     vis = BBoxVisualization(cls_dict)
     trt_yolo = TrtYOLO(args.model, args.category_num, args.letter_box)
+
+    client.tls_set(tls_version=mqtt.client.ssl.PROTOCOL_TLS)
+    client.connect("broker.hivemq.com", 8883)
 
     open_window(
         WINDOW_NAME, 'Camera TensorRT YOLO Demo',
