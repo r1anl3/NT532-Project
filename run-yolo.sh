@@ -2,14 +2,10 @@
 
 # Prompt the user for input
 read -p "Enter num: " num
-read -p "Enter type (detect/classify): " type
-read -p "Enter source (image/video path): " source
+read -p "Enter type (onboard/video/image): " type
+read -p "Enter source (id/video/image path): " source
 
 # Run the Python code with the entered arguments
-command = python3 trt-yolo-${num}.py --${type} "${source}" -m yolov4-416
-echo "Running command: $command"
-
-# Run the command
-$command
+python3 trt-yolo-${num}.py --${type} "${source}" -m yolov4-416
 
 echo "Done!"
