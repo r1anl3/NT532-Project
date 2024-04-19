@@ -24,7 +24,7 @@ import paho.mqtt.client as paho
 from paho import mqtt
 
 WINDOW_NAME = 'TrtYOLODemo'
-client = paho.Client(paho.CallbackAPIVersion.VERSION1,client_id="", userdata=None, protocol=paho.MQTTv5)
+client = paho.Client()
 
 
 def parse_args():
