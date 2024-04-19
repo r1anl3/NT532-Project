@@ -83,6 +83,7 @@ def loop_and_detect(cam, trt_yolo, conf_th, vis):
 
         if(count == 20):
             client.publish("iot-uit/room-status", payload="Room 2: " + str(vis.box_count) + "/20 people", qos=1)
+            count = 0
 
         toc = time.time()
         curr_fps = 1.0 / (toc - tic)
