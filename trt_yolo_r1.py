@@ -66,6 +66,7 @@ def loop_and_detect(cam, trt_yolo, conf_th, vis):
     fps = 0.0
     tic = time.time()
     count = 0
+    original_string = "{ \"ChatID\": \"5933987198\", \"Message\":\"Room 1:/5 people\" }"
 
     while True:
         count += 1
@@ -82,7 +83,9 @@ def loop_and_detect(cam, trt_yolo, conf_th, vis):
         cv2.imshow(WINDOW_NAME, img)
 
         if(count == 20):
-            client.publish("iot-uit/room-status", payload="Room 1: " + str(vis.box_count) + "/5 people", qos=1)
+            modified_string = original_string[:44] + " " +  str(vis.box_count) + original_string[44:]
+            client.publish("iot-uit/room-status", payload=modified_string, qos=1)
+            count = 0
 
         toc = time.time()
         curr_fps = 1.0 / (toc - tic)
