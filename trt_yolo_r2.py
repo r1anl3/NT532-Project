@@ -66,7 +66,7 @@ def loop_and_detect(cam, trt_yolo, conf_th, vis):
     fps = 0.0
     tic = time.time()
     count = 0
-    original_string = "{ \"ChatID\": \"5933987198\", \"Message\":\"Room 1:/20 people\" }"
+    original_string = "{ \"ChatID\": \"5933987198\", \"Message\":\"Room 2:/20 people\" }"
 
 
     while True:
