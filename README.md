@@ -22,7 +22,7 @@ Public room monitoring system using Computer Vision with Jetson Nano
 
 - Cloud - [**Microsoft Azure**](https://azure.microsoft.com/)
 - Function as a Service (FaaS) - [**Open FaaS**](https://www.openfaas.com/)
-- Containeriztion - [**Docker**](https://www.docker.com/), [**Kubernetes**](https://kubernetes.io/)
+- Containerization - [**Docker**](https://www.docker.com/), [**Kubernetes**](https://kubernetes.io/)
 - Embedded computing board - [**Jetson Nano**](https://developer.nvidia.com/embedded/jetson-nano)
 - MQTT Broker - [**HiveMQ**](https://www.hivemq.com/)
 - Notification - [**Telegram**](https://web.telegram.org/)
